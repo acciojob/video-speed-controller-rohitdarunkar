@@ -1,2 +1,23 @@
+.wrapper {
+  width: 850px;
+  display: flex;
+}
+
+.speed {
+  width: 60px;
+  margin-left: 10px;
+  background: #efefef;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+}
+
+.speed-bar {
+  width: 100%;
+  background: #ffc600;
+  text-align: center;
+  font-size: 18px;
+  height: 16.666%;
+}
 
 /* Your CSS Code here. */

@@ -4,7 +4,7 @@ const video = document.querySelector('.flex');
 
 function handleMove(e) {
   const y = e.offsetY;
-  const height = this.offsetHeight;
+  const height = speed.offsetHeight;
 
   const min = 0.4;
   const max = 4;
@@ -18,6 +18,3 @@ function handleMove(e) {
 }
 
 speed.addEventListener('mousemove', handleMove);
-
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-   inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
