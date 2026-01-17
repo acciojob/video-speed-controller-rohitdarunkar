@@ -1,20 +1,56 @@
-const speed = document.querySelector('.speed');
-const bar = document.querySelector('.speed-bar');
-const video = document.querySelector('.flex');
+const video = document.querySelector('.player__video');
+const toggle = document.querySelector('.toggle');
+const rewind = document.querySelector('.rewind');
+const skip = document.querySelector('.skip');
+const progress = document.querySelector('.progress');
+const progressFilled = document.querySelector('.progress__filled');
+const sliders = document.querySelectorAll('.player__slider');
 
-function handleMove(e) {
-  const y = e.offsetY;
-  const height = speed.offsetHeight;
-
-  const min = 0.4;
-  const max = 4;
-
-  const percent = y / height;
-  const playbackRate = percent * (max - min) + min;
-
-  bar.style.height = `${Math.round(percent * 100)}%`;
-  bar.textContent = `${playbackRate.toFixed(2)}×`;
-  video.playbackRate = playbackRate;
+// Play / Pause
+function togglePlay() {
+  video.paused ? video.play() : video.pause();
 }
 
-speed.addEventListener('mousemove', handleMove);
+function updateButton() {
+  toggle.textContent = video.paused ? '►' : '❚❚';
+}
+
+// Progress bar
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressFilled.style.width = `${percent}%`;
+}
+
+// Scrub
+function scrub(e) {
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+}
+
+// Volume & Speed
+function handleSliderUpdate() {
+  video[this.name] = this.value;
+}
+
+// Skip
+function skipTime() {
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
+// Event listeners
+video.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+video.addEventListener('timeupdate', handleProgress);
+
+toggle.addEventListener('click', togglePlay);
+rewind.addEventListener('click', skipTime);
+skip.addEventListener('click', skipTime);
+
+sliders.forEach(slider => slider.addEventListener('input', handleSliderUpdate));
+
+let mouseDown = false;
+progress.addEventListener('click', scrub);
+progress.addEventListener('mousemove', (e) => mouseDown && scrub(e));
+progress.addEventListener('mousedown', () => mouseDown = true);
+progress.addEventListener('mouseup', () => mouseDown = false);

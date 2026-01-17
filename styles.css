@@ -1,23 +1,38 @@
-.wrapper {
-  width: 850px;
-  display: flex;
+.player {
+  max-width: 750px;
+  margin: 40px auto;
+  border: 5px solid #000;
 }
 
-.speed {
-  width: 60px;
-  margin-left: 10px;
-  background: #efefef;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-}
-
-.speed-bar {
+.player__video {
   width: 100%;
-  background: #ffc600;
-  text-align: center;
-  font-size: 18px;
-  height: 16.666%;
 }
 
-/* Your CSS Code here. */
+.player__controls {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.player__button {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.player__slider {
+  margin: 0 5px;
+}
+
+.progress {
+  flex: 1;
+  height: 10px;
+  background: #ccc;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.progress__filled {
+  width: 0%;
+  height: 100%;
+  background: #ffc600;
+}
